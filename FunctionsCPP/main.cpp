@@ -6,15 +6,20 @@
 #include "IO.h"
 
 #define PATH "F:/Programming_Workspace/FunctionsCPP/documents/data1.txt"
+#define PORT "COM1" 
+#define BAUD_RATE 115200
 
 using namespace std;
+using namespace IO;
 
 int main() {
-	vector<vector<double>> valueTable = IO::parsecsv<double>(IO::readFile(PATH));
+	SerialManager serial(PORT, BAUD_RATE) // Continuar daqui
 
-	// Média da inclinação
-	// double angularvalue = Math::linearRegression(valueTable, 1, 9.8);
-	//cout << angularvalue << endl;
+
+
+	vector<vector<double>> valueTable = IO::parsecsv<double>(IO::readFile(PATH));
+	
+	
 
 	return 0;
 }

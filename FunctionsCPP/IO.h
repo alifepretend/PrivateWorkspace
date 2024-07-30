@@ -21,7 +21,8 @@ public:
 
 	static void writeFile(string text, string path) {
 		// Cria e abre um arquivo de texto
-		ofstream file(path);
+		// ios::app -> append
+		ofstream file(path, ios::app);
 
 		// Escreve no arquivo
 		file << text;
@@ -128,6 +129,7 @@ public:
 
 	}
 
-	class SerialConfig;
+	class SerialManager::SerialManager(char* serial_port, long int baud_rate);
+	int SerialManager::receiveData(string* line); 
 };
 
