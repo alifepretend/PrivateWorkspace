@@ -39,7 +39,7 @@ char PORT_C[4] = { 'C', 'O', 'M', '1' };
 int main() {
 	serialib serial;
 
-	// Tenta iniciar conex„o com porta serial.
+	// Tenta iniciar conex√£o com porta serial.
 	char errorOpening = serial.openDevice(PORT_C, BAUD_RATE);
 
 	// Se conseguir abrir o dispositivo:
@@ -47,7 +47,7 @@ int main() {
 		printf("Successful connection to %s\n", PORT_C);
 	}
 	else {
-		cout << "Erro ao tentar estabelecer conex„o com dispositivo." << endl;
+		cout << "Erro ao tentar estabelecer conexÔøΩo com dispositivo." << endl;
 	}
 
 
@@ -67,9 +67,8 @@ int main() {
 	return 0;
 }
 
-// -> Medir tens„o nos pinos dos NTCs e Pt100. -> Transformar em uma planilha no formato: 
+// -> Medir tens√£o nos pinos dos NTCs e Pt100. -> Transformar em uma planilha no formato: 
 //		*ntc-1*, *ntc-2*, *ntc-3*, *ntc-4*, *ntc-5*, *ntc-6*, *ntc-7*, *ntc-8*, *Pt100*, *time_ms*;
-// -> Salvar arquivo na memÛria flash.
+// -> Salvar arquivo na mem√≥ria flash.
 // -> Esperar 50ms.
 // -> Repetir.
-
