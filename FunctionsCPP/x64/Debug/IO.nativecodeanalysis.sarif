@@ -20,21 +20,29 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///f:/programming_workspace/functionscpp/io.cpp"
+            "uri": "file:///f:/projects_git/privateworkspace/functionscpp/io.cpp"
           },
           "roles": [
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "7f06bea079e1051f128917dbccb891539b7f39018507cf98502d39c2cf4c46ef"
+            "sha-256": "5ce5759bc1bc59e3c2e4b381c8e5e7c312f912616dd29659f3dd4490829f3fb7"
           }
         },
         {
           "location": {
-            "uri": "file:///f:/programming_workspace/functionscpp/io.h"
+            "uri": "file:///f:/projects_git/privateworkspace/functionscpp/io.h"
           },
           "hashes": {
-            "sha-256": "6f44e767f75a4d0501b9ca732c319b4e9736f7d30e467e489c839b093b58088f"
+            "sha-256": "421ff7e720ac0424aacddf4cca52f8df8e55c1d53099cb1670123630b132f411"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///f:/projects_git/privateworkspace/functionscpp/serialib/serialib.h"
+          },
+          "hashes": {
+            "sha-256": "540d4f983ae22e727873af1ba3d95508667fe15845d9a657fd21f943667ddb14"
           }
         }
       ]

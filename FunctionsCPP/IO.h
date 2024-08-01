@@ -11,6 +11,10 @@
 
 using namespace std;
 
+#ifndef IO_H
+#define IO_H
+
+
 class IO
 {
 public:
@@ -129,7 +133,15 @@ public:
 
 	}
 
-	class SerialManager::SerialManager(char* serial_port, long int baud_rate);
-	int SerialManager::receiveData(string* line); 
-};
 
+	
+
+};
+//class SerialManager {
+//public:
+//	SerialManager(char* serial_port, long int baud_rate);
+//
+//	int receiveData(string * line);
+//};
+
+#endif // !IO_H

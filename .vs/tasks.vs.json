@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-serialib",
+      "appliesTo": "FunctionsCPP/serialib/serialib.cpp",
+      "type": "launch"
+    }
+  ]
+}
