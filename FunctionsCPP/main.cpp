@@ -1,61 +1,74 @@
+/**
+ * @file /example1/main.cpp
+ * @author Philippe Lucidarme
+ * @date December 2019
+ * @brief File containing example of serial port communication
+ *
+ * This example send a string through the serial device
+ * The program expect receiving a string from the device
+ * The received string is expected to terminated by a carriage return
+ *
+ * The following code has been tested with this Arduino Uno sketch
+ * that return the uppercase character received on the serial device
+ *
+ * // Setup, initialize
+ * void setup() {
+ *      Serial.begin(115200);
+ * }
+ *
+ * // Loop forever
+ * void loop() {
+ * // If serial data is pending, read and write the character uppercased
+ * if (Serial.available())
+ *      Serial.write( toupper (Serial.read()) );
+ * }
+ *
+ * @see https://lucidar.me
+ */
+
+
+ // Serial library
+#include "serialib.h"
+#include <stdio.h>
+
+
+#if defined (_WIN32) || defined(_WIN64)
+    //for serial ports above "COM9", we must use this extended syntax of "\\.\COMx".
+    //also works for COM0 to COM9.
+    //https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea?redirectedfrom=MSDN#communications-resources
+#define SERIAL_PORT "\\\\.\\COM1"
+#endif
+#if defined (__linux__) || defined(__APPLE__)
+#define SERIAL_PORT "/dev/ttyACM0"
+#endif
+
 #include <iostream>
 #include <vector>
 #include <string> 
 #include <array>
 #include <cstring> 
-#include "Math.h"
+#include "math.h"
+#include <fstream>
+#include <sstream>
 #include "IO.h"
-#include "serialib/serialib.h"
 
-#define PATH "F:/Programming_Workspace/FunctionsCPP/documents/data1.txt"
-#define BAUD_RATE 115200
 
-int receiveData(string* line, serialib serial) {
-	string data = "";
 
-	while (serial.available() != 0) {
-		char c;
-		try {
-			serial.readChar(&c);
-			data += c;
-
-			if (c == ';') {
-				*line = data;
-				return 1;
-			}
-		}
-		catch (int e) {
-			cout << "Erro ao tentar ler caractere." << endl;
-			return 0;
-		}
-	}
-}
+#define path "f:/programming_workspace/functionscpp/documents/data1.txt"
+#define SERIAL_PORT "\\\\.\\COM13"
+const unsigned long int BAUD_RATE = 115200;
 
 using namespace std;
 
-
-char PORT_C[4] = { 'C', 'O', 'M', '1' };
+string line = "";
+IO::Serial serial(SERIAL_PORT, BAUD_RATE);
 
 int main() {
-	serialib serial;
-
-	// Tenta iniciar conexão com porta serial.
-	char errorOpening = serial.openDevice(PORT_C, BAUD_RATE);
-
-	// Se conseguir abrir o dispositivo:
-	if (errorOpening == 1) {
-		printf("Successful connection to %s\n", PORT_C);
-	}
-	else {
-		cout << "Erro ao tentar estabelecer conex�o com dispositivo." << endl;
-	}
-
-
-
-	string line = "";
+	
 
 	while (1) {
-		receiveData(&line, serial);
+		serial.receiveData(&line);
+
 		 // Continuar daqui
 	}
 
@@ -67,8 +80,11 @@ int main() {
 	return 0;
 }
 
+
 // -> Medir tensão nos pinos dos NTCs e Pt100. -> Transformar em uma planilha no formato: 
 //		*ntc-1*, *ntc-2*, *ntc-3*, *ntc-4*, *ntc-5*, *ntc-6*, *ntc-7*, *ntc-8*, *Pt100*, *time_ms*;
 // -> Salvar arquivo na memória flash.
 // -> Esperar 50ms.
 // -> Repetir.
+
+

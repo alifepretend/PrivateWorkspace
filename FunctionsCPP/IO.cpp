@@ -90,47 +90,58 @@ vector<vector<double>> IO::parsecsv(vector<string> linelist) {
 
 }
 
+double IO::stringToDouble(string s) {
+    istringstream iss(s);
+    double value;
+    // Tenta extrair um double do stream
+    if (iss >> value) {
+        return value;
+    }
+    else {
+        return 0;
+    }
+}
+
+IO::Serial::Serial(const char* serial_port, long int baud_rate) {
+    // tenta iniciar conex�o com porta serial.
+    char erroropening = serial.openDevice(serial_port, baud_rate);
+
+    // se conseguir abrir o dispositivo:
+    if (erroropening == 1) {
+        printf("successful connection to %s\n", serial_port);
+    }
+    else {
+        cout << "erro ao tentar estabelecer conex�o com dispositivo." << endl;
+    }
+}
+
+int  IO::Serial::receiveData(string* line) {
+    string data = "";
+    *line = "";
+    if (serial.available() != 0) {
+        char c;
+
+            serial.readChar(&c, 4);
+            
+            switch (c) {
+                case ';': {               
+                   /* *line = data;*/
+  
+                    return 1;
+                    break;
+                }
+                case '/n': {
+                    break;
+                }
+                case '/r': {
+                    break;
+                }
+                default: {
+                    *line += c;
+                    cout << *line;
+                }
+            }
 
 
-//class SerialManager {
-//private:
-//	
-//public:
-//	serialib serial;
-//	// Inicia a porta serial.
-//	SerialManager(char* serial_port, long int baud_rate) {
-//
-//		// Tenta iniciar conex�o com porta serial.
-//		char errorOpening = serial.openDevice(serial_port, baud_rate);
-//
-//		// Se conseguir abrir o dispositivo:
-//		if (errorOpening == 1) {
-//			printf("Successful connection to %s\n", serial_port);
-//		}
-//		else {
-//			cout << "Erro ao tentar estabelecer conex�o com dispositivo." << endl;
-//		}
-//	}
-//	
-//	// Retorna 1 no caso de sucesso, 0 caso falhe.
-//	int  receiveData(string* line) {
-//		string data = "";
-//
-//		while(serial.available() != 0) {
-//			char c;
-//			try {
-//				serial.readChar(&c);
-//				data += c;
-//				
-//				if(c == ';') {
-//					*line = data;
-//					return 1;
-//				}
-//			} catch (int e) {
-//				cout << "Erro ao tentar ler caractere." << endl;
-//				return 0;
-//			}
-//		}
-//	}
-//};
-
+    }
+}

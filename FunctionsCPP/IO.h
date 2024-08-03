@@ -1,4 +1,5 @@
 #pragma once
+#include "serialib.h"
 
 #ifndef IO_H
 #define IO_H
@@ -10,7 +11,7 @@
 #include <vector>
 #include <codecvt>
 #include <locale>
-#include "serialib/serialib.h"
+
 
 using namespace std;
 
@@ -35,26 +36,18 @@ public:
 
 	vector<vector<double>> parsecsv(vector<string> linelist);
 
+	double stringToDouble(string s);
 
+	class Serial {
+	private:
+		serialib serial;
+	public:
+		// inicia a porta serial.
+		Serial(const char* serial_port, long int baud_rate);
+
+		// retorna 1 no caso de sucesso, 0 caso falhe.
+		int  receiveData(string* line);
+	};
 };
-
-double stringToDouble(string s) {
-	istringstream iss(s);
-	double value;
-	// Tenta extrair um double do stream
-	if (iss >> value) {
-		return value;
-	}
-	else {
-		return 0;
-	}
-}
-
-//class SerialManager {
-//public:
-//	SerialManager(char* serial_port, long int baud_rate);
-//
-//	int receiveData(string * line);
-//};
 
 #endif // !IO_H
