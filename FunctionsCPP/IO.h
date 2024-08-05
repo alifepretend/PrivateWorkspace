@@ -23,7 +23,7 @@ public:
 		unsigned int y = 0;
 	};
 
-	void writeFile(string text, string path);
+	void writeFile(string text, string path, bool append = 1);
 
 	// Retorna a lista de linhas em um arquivo.
 	static vector<string> readFile(string path);
@@ -42,6 +42,8 @@ public:
 	private:
 		serialib serial;
 	public:
+		char erroropening = 0;
+
 		// inicia a porta serial.
 		Serial(const char* serial_port, long int baud_rate);
 

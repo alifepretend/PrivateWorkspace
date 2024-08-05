@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\FunctionsCPP",
+    "\\FunctionsCPP\\documents",
     "\\FunctionsCPP\\serialib"
   ],
-  "SelectedNode": "\\FunctionsCPP\\IO.cpp",
+  "SelectedNode": "\\FunctionsCPP\\main.cpp",
   "PreviewInSolutionExplorer": false
 }

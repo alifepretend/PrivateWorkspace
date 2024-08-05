@@ -1,0 +1,7 @@
+﻿  IO.cpp
+  main.cpp
+F:\Projects_git\PrivateWorkspace\FunctionsCPP\main.cpp(28,1): warning C4005: 'SERIAL_PORT': macro redefinition
+F:\Projects_git\PrivateWorkspace\FunctionsCPP\main.cpp(8): message : see previous definition of 'SERIAL_PORT'
+F:\Projects_git\PrivateWorkspace\FunctionsCPP\main.cpp(44,19): error C2660: 'IO::writeFile': function does not take 0 arguments
+F:\Projects_git\PrivateWorkspace\FunctionsCPP\IO.h(26,14): message : see declaration of 'IO::writeFile'
+  Generating Code...

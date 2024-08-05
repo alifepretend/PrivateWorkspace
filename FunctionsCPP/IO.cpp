@@ -1,16 +1,27 @@
 #include "io.h"
 
+string temp = "";
 
-void IO::writeFile(string text, string path) {
+void IO::writeFile(string text, string path, bool append) {
     // Cria e abre um arquivo de texto
     // ios::app -> append
-    ofstream file(path, ios::app);
-
+    text.pop_back();
+    ofstream file;
+    if (append) {
+        file.open(path, ios::app | std::ios_base::out);
+    }
+    else {
+        file.open(path);
+    }
+    
+    
     // Escreve no arquivo
     file << text;
 
     // Fecha o arquivo
     file.close();
+
+    cout << text << "	Written to file" << endl;
 }
 
 vector<string> IO::readFile(string path) {
@@ -104,7 +115,7 @@ double IO::stringToDouble(string s) {
 
 IO::Serial::Serial(const char* serial_port, long int baud_rate) {
     // tenta iniciar conex�o com porta serial.
-    char erroropening = serial.openDevice(serial_port, baud_rate);
+    erroropening = serial.openDevice(serial_port, baud_rate);
 
     // se conseguir abrir o dispositivo:
     if (erroropening == 1) {
@@ -115,33 +126,35 @@ IO::Serial::Serial(const char* serial_port, long int baud_rate) {
     }
 }
 
-int  IO::Serial::receiveData(string* line) {
-    string data = "";
-    *line = "";
+int IO::Serial::receiveData(string* line) {
     if (serial.available() != 0) {
         char c;
 
-            serial.readChar(&c, 4);
+        serial.readChar(&c, 4);
             
-            switch (c) {
-                case ';': {               
-                   /* *line = data;*/
-  
-                    return 1;
-                    break;
-                }
-                case '/n': {
-                    break;
-                }
-                case '/r': {
-                    break;
-                }
-                default: {
-                    *line += c;
-                    cout << *line;
-                }
+        switch (c) {
+            case ';': {               
+                temp += c;
+                *line = temp;
+                temp = "";
+
+                return 1;
+                break;
             }
-
-
+            case '/n': {
+                break;
+            }
+            case '/r': {
+                break;
+            }
+            case '/0': {
+                break;
+            }
+            default: {
+                temp += c;
+            }
+        }
     }
+
+    return 0;
 }
