@@ -247,7 +247,7 @@ char serialib::openDevice(const char *Device, const unsigned int Bauds,
     // If the device is not open, return -2
     if (fd == -1) return -2;
     // Open the device in nonblocking mode
-    fcntl(fd, F_SETFL, FNDELAY);
+    //fcntl(fd, F_SETFL, FNDELAY);
 
 
     // Get the current options of the port
