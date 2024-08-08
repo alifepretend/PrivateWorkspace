@@ -38,6 +38,8 @@ public:
 
 	double stringToDouble(string s);
 
+	vector<vector<double>> approximateGivenTheTime(vector<vector<double>>* reference_list, vector<vector<double>> signal_list);
+
 	class Serial {
 	private:
 		serialib serial;

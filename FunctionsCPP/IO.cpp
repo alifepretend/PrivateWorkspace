@@ -1,8 +1,11 @@
 #include "io.h"
+#include <chrono>
 
 string temp = "";
 
 void IO::writeFile(string text, string path, bool append) {
+    using namespace std::chrono;
+
     // Cria e abre um arquivo de texto
     // ios::app -> append
     text.pop_back();
@@ -16,7 +19,8 @@ void IO::writeFile(string text, string path, bool append) {
     
     
     // Escreve no arquivo
-    file << text;
+    auto time = system_clock::now();
+    file << text << ',' << duration_cast<milliseconds>(time.time_since_epoch()).count();
 
     // Fecha o arquivo
     file.close();
@@ -33,6 +37,7 @@ vector<string> IO::readFile(string path) {
     // Adiciona as linhas na lista.
     while (getline(file, line)) {
         lineList.push_back(line);
+        cout << line << endl;
     }
 
     return lineList;
@@ -74,6 +79,14 @@ vector<vector<double>> IO::parsecsv(vector<string> linelist) {
                     linetemp.push_back(stringToDouble(valuetemp));
                     break;
                 }
+                case '\n': {
+                    linetemp.push_back(stringToDouble(valuetemp));
+                    break;
+                }
+                case '\r': {
+                    linetemp.push_back(stringToDouble(valuetemp));
+                    break;
+                }
 
                 // avisa que um valor string está começando ou terminando.
                 case '"': {
@@ -96,7 +109,7 @@ vector<vector<double>> IO::parsecsv(vector<string> linelist) {
         valuematrix.push_back(linetemp);
     }
 
-
+    cout << valuematrix.size();
     return valuematrix;
 
 }
@@ -157,4 +170,33 @@ int IO::Serial::receiveData(string* line) {
     }
 
     return 0;
+}
+
+// Pega os valores mais próximos do y da segunda coluna em relação ao y da primeira coluna (proximidade
+// de acordo com o x).
+// Retorna o y da referencia em função do y do sinal.
+vector<vector<double>> IO::approximateGivenTheTime(vector<vector<double>>* reference_list, vector<vector<double>> signal_list) {
+    vector<vector<double>> approximation = {};
+    int current_signal_index_verified = 0;
+    int last_signal_index_verified = 0;
+    bool next = false;
+
+    for (int i = 0; i < (*reference_list).size(); i++) {
+        next = false;
+        
+        while (!next) {
+            if (signal_list[current_signal_index_verified][1] <= (*reference_list)[i][1]) {
+                last_signal_index_verified = current_signal_index_verified;
+                current_signal_index_verified += 1;
+            }
+            else {
+                approximation.push_back({ signal_list[last_signal_index_verified][0], (*reference_list)[i][0] });
+                cout << "Added to aproximation: { " << signal_list[last_signal_index_verified][0] << ", " << (*reference_list)[i][0] << " }" << endl;
+                next = true;
+            }
+        }
+
+        
+    }
+    return approximation;
 }
