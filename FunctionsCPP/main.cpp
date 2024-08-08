@@ -11,14 +11,11 @@
 #include <chrono>
 #include <thread>
 
-string path = "F:/Projects_git/PrivateWorkspace/FunctionsCPP/documents/data1.txt";
-
 using namespace std;
 using namespace std::this_thread; // sleep_for, sleep_until
 using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 string line = "";
-
 
 int main() {
 	vector<vector<double>> adc_esp = IO().parsecsv(IO().readFile("F:\\Projects_git\\PrivateWorkspace\\FunctionsCPP\\adc_esp.txt"));

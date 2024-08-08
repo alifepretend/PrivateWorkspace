@@ -1,2 +1,8 @@
-﻿  main.cpp
+﻿  IO.cpp
+  main.cpp
+  serialib.cpp
+F:\Projects_git\PrivateWorkspace\FunctionsCPP\serialib.cpp(435,7): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Projects_git\PrivateWorkspace\FunctionsCPP\serialib.cpp(1106,29): warning C4244: '=': conversion from 'LONGLONG' to 'int', possible loss of data
+F:\Projects_git\PrivateWorkspace\FunctionsCPP\serialib.cpp(1109,15): warning C4244: 'return': conversion from 'LONGLONG' to 'unsigned long', possible loss of data
+  Generating Code...
   FunctionsCPP.vcxproj -> F:\Projects_git\PrivateWorkspace\FunctionsCPP\x64\Debug\FunctionsCPP.exe
