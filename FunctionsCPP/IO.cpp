@@ -8,7 +8,6 @@ void IO::writeFile(string text, string path, bool append) {
 
     // Cria e abre um arquivo de texto
     // ios::app -> append
-    text.pop_back();
     ofstream file;
     if (append) {
         file.open(path, ios::app | std::ios_base::out);
@@ -17,7 +16,30 @@ void IO::writeFile(string text, string path, bool append) {
         file.open(path);
     }
     
-    
+    // Escreve no arquivo
+    file << text;
+
+    // Fecha o arquivo
+    file.close();
+
+    cout << text << "	Written to file" << endl;
+}
+
+void IO::writeFileWithCurrentTime(string text, string path, bool append) {
+    using namespace std::chrono;
+
+    // Cria e abre um arquivo de texto
+    // ios::app -> append
+    text.pop_back();
+    ofstream file;
+    if (append) {
+        file.open(path, ios::app | std::ios_base::out);
+    }
+    else {
+        file.open(path);
+    }
+
+
     // Escreve no arquivo
     auto time = system_clock::now();
     file << text << ',' << duration_cast<milliseconds>(time.time_since_epoch()).count();
@@ -183,8 +205,9 @@ vector<vector<double>> IO::approximateGivenTheTime(vector<vector<double>>* refer
 
     for (int i = 0; i < (*reference_list).size(); i++) {
         next = false;
-        
-        while (!next) {
+
+
+        while (!next && (current_signal_index_verified < signal_list.size()-1)) {
             if (signal_list[current_signal_index_verified][1] <= (*reference_list)[i][1]) {
                 last_signal_index_verified = current_signal_index_verified;
                 current_signal_index_verified += 1;
@@ -195,8 +218,6 @@ vector<vector<double>> IO::approximateGivenTheTime(vector<vector<double>>* refer
                 next = true;
             }
         }
-
-        
     }
     return approximation;
 }

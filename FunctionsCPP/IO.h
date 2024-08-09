@@ -25,6 +25,8 @@ public:
 
 	void writeFile(string text, string path, bool append = 1);
 
+	void writeFileWithCurrentTime(string text, string path, bool append = 1);
+
 	// Retorna a lista de linhas em um arquivo.
 	static vector<string> readFile(string path);
 

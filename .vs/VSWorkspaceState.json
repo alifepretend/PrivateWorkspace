@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\FunctionsCPP",
-    "\\FunctionsCPP\\x64",
-    "\\Temp_Sense_Arduino"
+    "\\FunctionsCPP"
   ],
-  "SelectedNode": "\\FunctionsCPP\\main.cpp",
+  "SelectedNode": "\\FunctionsCPP\\approximation.txt",
   "PreviewInSolutionExplorer": false
 }
