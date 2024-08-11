@@ -12,7 +12,6 @@
 #include <codecvt>
 #include <locale>
 
-
 using namespace std;
 
 class IO
